@@ -58,6 +58,17 @@ async def main():
     # اجرای ربات
     await application.run_polling()
 
+# تابعی برای اجرا در محیط‌های با حلقه رویداد فعال
+def run_bot():
+    try:
+        asyncio.run(main())
+    except RuntimeError as e:
+        if str(e) == "This event loop is already running":
+            # اگر حلقه رویداد در حال اجراست، main را به صورت عادی اجرا کنید
+            asyncio.get_event_loop().run_until_complete(main())
+        else:
+            raise e
+
 # اجرای برنامه
 if __name__ == '__main__':
-    asyncio.get_event_loop().run_until_complete(main())
+    run_bot()
