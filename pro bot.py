@@ -1,6 +1,7 @@
 import logging
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
+import nest_asyncio  # اضافه کنید
 
 # توکن ربات
 BOT_TOKEN = '8026191420:AAGkIwuskDtU_opshjhY5DRMRP72Gzg5ojU'
@@ -43,6 +44,9 @@ async def main():
 
 if __name__ == '__main__':
     import asyncio  # فقط در اینجا وارد کنید
+
+    # وارد کردن nest_asyncio
+    nest_asyncio.apply()  # این خط را اضافه کنید
 
     # ثبت شروع ربات
     logging.info("Starting the bot...")
