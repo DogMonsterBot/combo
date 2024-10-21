@@ -1,6 +1,5 @@
 import os
 import logging
-import asyncio
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
 from googletrans import Translator
@@ -37,7 +36,10 @@ async def main():
     await application.run_polling()
 
 if __name__ == '__main__':
+    import asyncio
+
+    # استفاده از asyncio.run() به جای get_event_loop
     try:
         asyncio.run(main())
-    except Exception as e:
-        logging.error(f'خطا در اجرای ربات: {e}')
+    except RuntimeError as e:
+        print(f"خطا: {e}")
