@@ -5,6 +5,9 @@ from deep_translator import GoogleTranslator
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters
 
+import nest_asyncio  # اضافه کردن nest_asyncio برای حل مشکل حلقه رویداد
+nest_asyncio.apply()  # اعمال تنظیمات
+
 # تنظیمات ورود به سیستم
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -60,14 +63,7 @@ async def main():
 
 # تابعی برای اجرا در محیط‌های با حلقه رویداد فعال
 def run_bot():
-    try:
-        asyncio.run(main())
-    except RuntimeError as e:
-        if str(e) == "This event loop is already running":
-            # اگر حلقه رویداد در حال اجراست، main را به صورت عادی اجرا کنید
-            asyncio.get_event_loop().run_until_complete(main())
-        else:
-            raise e
+    asyncio.run(main())  # اجرای تابع اصلی
 
 # اجرای برنامه
 if __name__ == '__main__':
