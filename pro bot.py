@@ -1,12 +1,13 @@
 import logging
+import nest_asyncio  # اضافه کردن ماژول nest_asyncio
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
+from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
 
 # توکن ربات
 BOT_TOKEN = '8026191420:AAGkIwuskDtU_opshjhY5DRMRP72Gzg5ojU'
 
 # شناسه گروه مقصد
-TARGET_GROUP_ID = '@IntroductionofAirdrop'
+TARGET_GROUP_ID = '@IntroductionofAirdrop'  # تغییر به @IntroductionofAirdrop
 
 # هشتگ‌های مورد نظر
 TAGS = ['#tag1', '#tag2', '#tag3']  # اینجا می‌توانید هشتگ‌های دلخواه خود را اضافه کنید
@@ -45,10 +46,12 @@ async def main():
     await application.run_polling()
 
 if __name__ == '__main__':
-    import asyncio  # فقط در اینجا وارد کنید
+    import asyncio
+
+    nest_asyncio.apply()  # اعمال nest_asyncio
 
     # ثبت شروع ربات
     logging.info("Starting the bot...")
-    
-    # استفاده از حلقه‌ی رویداد در حال اجرا
+
+    # استفاده از asyncio.run() برای شروع حلقه‌ی رویداد
     asyncio.run(main())
