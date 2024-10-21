@@ -1,5 +1,5 @@
 import logging
-import nest_asyncio
+import nest_asyncio # type: ignore
 from telegram import Update, Message
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
 
